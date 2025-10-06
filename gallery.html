@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootyverse Gallery - Cosmic Showcase</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+    <link rel="manifest" href="images/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.stars.min.js"></script>
@@ -72,13 +76,13 @@
         }
     </style>
 </head>
-<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center" style="background-image: url('/images/photo_1_2025-10-05_15-23-26.jpg');">
+<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center" style="background-image: url('images/photo_1_2025-10-05_15-23-26.jpg');">
     <div id="stars" class="fixed inset-0 -z-10"></div>
     <div id="planets" class="fixed inset-0 -z-10"></div>
     <div id="comets" class="fixed inset-0 -z-10"></div>
 <header class="container mx-auto p-6 flex justify-between items-center">
         <a href="index.html" class="flex items-center">
-            <img src="/images/bootyverse1.jpg" alt="Bootyverse Logo" class="w-16 h-16 rounded-full glow-box">
+            <img src="images/bootyverse1.jpg" alt="Bootyverse Logo" class="w-16 h-16 rounded-full glow-box">
 <h1 class="ml-4 text-2xl font-orbitron glow-text">BOOTYVERSE</h1>
         </a>
         <a href="index.html" class="px-6 py-2 bg-pink-600 hover:bg-pink-700 rounded-full font-bold font-orbitron transition-all glow-box">
@@ -113,7 +117,7 @@
     
     <script>
         async function loadGallery() {
-            const res = await fetch('/api/images');
+            const res = await fetch('/apiimages');
             const images = await res.json();
 
             const container = document.getElementById('galleryGrid');
