@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootyverse Gallery - Cosmic Showcase</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.stars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap');
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+        
+        .comet {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            transform-origin: left center;
+            animation: cometFly 15s linear infinite;
+        }
+        
+        @keyframes cometFly {
+            0% {
+                transform: translateX(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(1000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .glow-text { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .glow-box { box-shadow: 0 0 15px #ff00ff; }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center" style="background-image: url('/images/photo_1_2025-10-05_15-23-26.jpg');">
+    <div id="stars" class="fixed inset-0 -z-10"></div>
+    <div id="planets" class="fixed inset-0 -z-10"></div>
+    <div id="comets" class="fixed inset-0 -z-10"></div>
+<header class="container mx-auto p-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center">
+            <img src="/images/bootyverse1.jpg" alt="Bootyverse Logo" class="w-16 h-16 rounded-full glow-box">
+<h1 class="ml-4 text-2xl font-orbitron glow-text">BOOTYVERSE</h1>
+        </a>
+        <a href="index.html" class="px-6 py-2 bg-pink-600 hover:bg-pink-700 rounded-full font-bold font-orbitron transition-all glow-box">
+            BACK TO HOME
+        </a>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glow-text">COSMIC GALLERY</h2>
+        
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <!-- Modal -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 modal opacity-0 pointer-events-none">
+        <div class="relative max-w-4xl w-full bg-gray-900/90 rounded-xl overflow-hidden border border-pink-500/50 glow-box">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl bg-pink-600 hover:bg-pink-700 rounded-full w-10 h-10 flex items-center justify-center">
+                <i data-feather="x"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="w-full max-h-[70vh] object-contain">
+            <div class="p-6">
+                <h3 id="modalTitle" class="text-2xl font-bold font-orbitron"></h3>
+                <p id="modalDesc" class="mt-2 text-gray-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container mx-auto p-6 mt-12 text-center">
+        <p class="text-gray-400 font-orbitron">© 2025 BOOTYVERSE - ALL RIGHTS RESERVED</p>
+    </footer>
+    
+    
+    <script>
+        async function loadGallery() {
+            const res = await fetch('/api/images');
+            const images = await res.json();
+
+            const container = document.getElementById('galleryGrid');
+            container.innerHTML = '';
+
+            images.forEach(img => {
+                container.innerHTML += `
+                <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                    <img src="${img.url}" alt="${img.title}" class="w-full h-48 object-cover cursor-pointer"
+                    onclick="openModal('${img.full_url}', '${img.title}', '${img.description}')">
+                    <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">${img.title}</h3>
+                    <p class="mt-2 text-gray-300">${img.description}</p>
+                    </div>
+                </div>
+              `;
+            });
+        }
+
+        window.onload = loadGallery;
+
+        feather.replace();
+        
+        // Generate stars for background
+        function createStars(containerId, count) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size between 1 and 3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        // Generate planets for background
+        function createPlanets(containerId, count) {
+            const container = document.getElementById(containerId);
+            const colors = ['#ff9900', '#9900ff', '#00ff99', '#ff0099', '#0099ff'];
+            
+            for (let i = 0; i < count; i++) {
+                const planet = document.createElement('div');
+                planet.className = 'planet';
+                
+                // Random size between 50 and 200px
+                const size = Math.random() * 150 + 50;
+                planet.style.width = `${size}px`;
+                planet.style.height = `${size}px`;
+                
+                // Random position
+                planet.style.left = `${Math.random() * 90}%`;
+                planet.style.top = `${Math.random() * 90}%`;
+                
+                // Random color
+                planet.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(planet);
+            }
+        }
+        
+        // Generate comets
+        function createComets(containerId, count) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const comet = document.createElement('div');
+                comet.className = 'comet';
+                
+                // Random position and angle
+                comet.style.left = `${Math.random() * 20 - 20}%`;
+                comet.style.top = `${Math.random() * 100}%`;
+                comet.style.transform = `rotate(${Math.random() * 90 - 45}deg)`;
+                
+                // Random animation delay
+                comet.style.animationDelay = `${Math.random() * 15}s`;
+                
+                container.appendChild(comet);
+            }
+        }
+        
+        // Initialize the background
+        window.onload = function() {
+            loadGallery();
+            createStars('stars', 200);
+            createPlanets('planets', 3);
+            createComets('comets', 2);
+        };
+// Modal functions
+        function openModal(imgSrc, title, desc) {
+            const modal = document.getElementById('galleryModal');
+            document.getElementById('modalImage').src = imgSrc;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = desc;
+            
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'auto';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('galleryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

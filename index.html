@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootyverse - Cosmic Meme Revolution</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.stars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap');
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+        
+        .comet {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            transform-origin: left center;
+            animation: cometFly 15s linear infinite;
+        }
+        
+        @keyframes cometFly {
+            0% {
+                transform: translateX(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(1000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .glow-text { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .glow-box { box-shadow: 0 0 15px #ff00ff; }
+        .cosmic-gradient {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+</style>
+</head>
+<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center" style="background-image: url('/images/photo_1_2025-10-05_15-23-26.jpg');">
+    <div id="stars" class="fixed inset-0 -z-10"></div>
+    <div id="planets" class="fixed inset-0 -z-10"></div>
+    <div id="comets" class="fixed inset-0 -z-10"></div>
+<header class="container mx-auto p-4 md:p-6">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <div class="flex items-center">
+                    <img src="/images/bootyverse1.jpg" alt="Bootyverse Logo" class="w-12 h-12 md:w-16 md:h-16 rounded-full glow-box">
+<h1 class="ml-2 md:ml-4 text-xl md:text-2xl font-orbitron glow-text">BOOTYVERSE</h1>
+                </div>
+                <a href="https://dexscreener.com/" target="_blank" class="md:hidden px-4 py-1 bg-pink-600 hover:bg-pink-700 rounded-full font-bold font-orbitron transition-all glow-box text-sm">
+                    DEX
+                </a>
+            </div>
+            <a href="https://dexscreener.com/" target="_blank" class="hidden md:block px-6 py-2 bg-pink-600 hover:bg-pink-700 rounded-full font-bold font-orbitron transition-all glow-box">
+                DEXSCREENER
+            </a>
+        </div>
+    </header>
+<main class="container mx-auto px-6 py-12 md:py-24 flex flex-col items-center justify-center min-h-[60vh]">
+        <div class="max-w-4xl backdrop-blur-sm bg-black/30 p-8 rounded-xl border border-pink-500/30 glow-box">
+            <p class="text-lg md:text-xl leading-relaxed text-center font-orbitron">
+                
+In the vast expanse of the cosmos, where stars collide and realities bend, a legendary glitch sparked the birth of the BootyVerse; a mesmerizing realm where fantasy and reality fuse in a dazzling explosion of allure. From the crimson dunes of Mars to the icy plains of Neptune, this interdimensional haven celebrates the divine diversity of women’s curves, uniting galactic glutes in a symphony of beauty that transcends worlds. Born from chaos, $BootyVerse emerges as the meme coin that powers this cosmic escape, a token of transformation and desire. Step into the BootyVerse, where you can shed your earthly form and become anyone you dream of, gazing upon the beauties that ignite your imagination. With each coin you stack, you unlock the ultimate revolution—a gateway to own the cosmos itself. This is no fleeting hype or dev-orchestrated scheme; it’s a movement fueled by pure, organic energy. No rugs, no dumps, just the raw power of a community united under a stellar banner. Join the revolution, seize your $BootyVerse, and claim your place among the stars!
+            </p>
+            <div class="mt-8 flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 justify-center">
+                <a href="gallery.html" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 rounded-full font-bold font-orbitron text-center transition-all glow-box">
+                    EXPLORE GALLERY
+                </a>
+                <a href="#" class="px-8 py-3 bg-pink-600 hover:bg-pink-700 rounded-full font-bold font-orbitron text-center transition-all glow-box">
+                    BUY $BOOTY
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 p-6 flex justify-between items-center">
+        <div class="flex space-x-6">
+            <a href="https://t.me/" target="_blank" class="text-3xl hover:text-pink-400 transition-all">
+                <i data-feather="message-circle"></i>
+            </a>
+            <a href="https://x.com/bootyverseog" target="_blank" class="text-3xl hover:text-pink-400 transition-all">
+                <i data-feather="twitter"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Generate stars for background
+        function createStars(containerId, count) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size between 1 and 3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        // Generate planets for background
+        function createPlanets(containerId, count) {
+            const container = document.getElementById(containerId);
+            const colors = ['#ff9900', '#9900ff', '#00ff99', '#ff0099', '#0099ff'];
+            
+            for (let i = 0; i < count; i++) {
+                const planet = document.createElement('div');
+                planet.className = 'planet';
+                
+                // Random size between 50 and 200px
+                const size = Math.random() * 150 + 50;
+                planet.style.width = `${size}px`;
+                planet.style.height = `${size}px`;
+                
+                // Random position
+                planet.style.left = `${Math.random() * 90}%`;
+                planet.style.top = `${Math.random() * 90}%`;
+                
+                // Random color
+                planet.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(planet);
+            }
+        }
+        
+        // Generate comets
+        function createComets(containerId, count) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const comet = document.createElement('div');
+                comet.className = 'comet';
+                
+                // Random position and angle
+                comet.style.left = `${Math.random() * 20 - 20}%`;
+                comet.style.top = `${Math.random() * 100}%`;
+                comet.style.transform = `rotate(${Math.random() * 90 - 45}deg)`;
+                
+                // Random animation delay
+                comet.style.animationDelay = `${Math.random() * 15}s`;
+                
+                container.appendChild(comet);
+            }
+        }
+        // Initialize the background
+        window.onload = function() {
+            createStars('stars', 200);
+            createPlanets('planets', 3);
+            createComets('comets', 2);
+        }
+            // Animate elements on load
+            document.addEventListener('DOMContentLoaded', () => {
+const elements = document.querySelectorAll('header, main, footer');
+            elements.forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 200 * i);
+            });
+        });
+    </script>
+</body>
+</html>
