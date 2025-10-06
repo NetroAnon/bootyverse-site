@@ -169,7 +169,7 @@
 
         // Load recent uploads into Admin “Gallery Management”
         async function loadRecentUploads() {
-            const res = await fetch('/apiimages');
+            const res = await fetch('/api/images');
             const images = await res.json();
 
             const container = document.getElementById('recentUploads');

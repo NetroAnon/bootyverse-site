@@ -76,7 +76,7 @@
         }
     </style>
 </head>
-<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center" style="background-image: url('images/photo_1_2025-10-05_15-23-26.jpg');">
+<body class="text-white min-h-screen overflow-x-hidden bg-cover bg-center bg-black" style="background-image: url('images/photo_1_2025-10-05_15-23-26.jpg');">
     <div id="stars" class="fixed inset-0 -z-10"></div>
     <div id="planets" class="fixed inset-0 -z-10"></div>
     <div id="comets" class="fixed inset-0 -z-10"></div>
@@ -117,7 +117,7 @@
     
     <script>
         async function loadGallery() {
-            const res = await fetch('/apiimages');
+            const res = await fetch('/api/images');
             const images = await res.json();
 
             const container = document.getElementById('galleryGrid');
