@@ -93,7 +93,56 @@
     <main class="container mx-auto px-6 py-12">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glow-text">COSMIC GALLERY</h2>
         
-        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Gallery items will be dynamically loaded here -->
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo1.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo1.jpg', 'Cosmic Beauty', 'A stunning cosmic phenomenon captured in the Bootyverse')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Cosmic Beauty</h3>
+                    <p class="mt-2 text-gray-300">A stunning cosmic phenomenon captured in the Bootyverse</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_2_2025-10-05_15-23-26.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_2_2025-10-05_15-23-26.jpg', 'Nebula Dreams', 'Vibrant colors of the Bootyverse nebula')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Nebula Dreams</h3>
+                    <p class="mt-2 text-gray-300">Vibrant colors of the Bootyverse nebula</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_3_2025-10-05_15-23-26.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_3_2025-10-05_15-23-26.jpg', 'Stellar Booty', 'The most celebrated cosmic curves')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Stellar Booty</h3>
+                    <p class="mt-2 text-gray-300">The most celebrated cosmic curves</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_4_2025-10-05_15-23-26.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_4_2025-10-05_15-23-26.jpg', 'Galactic Glow', 'Radiant energy from the Bootyverse core')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Galactic Glow</h3>
+                    <p class="mt-2 text-gray-300">Radiant energy from the Bootyverse core</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_5_2025-10-05_15-23-26.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_5_2025-10-05_15-23-26.jpg', 'Quantum Curves', 'Interdimensional physics of cosmic beauty')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Quantum Curves</h3>
+                    <p class="mt-2 text-gray-300">Interdimensional physics of cosmic beauty</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
+                <img src="https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_6_2025-10-05_15-23-27.jpg" alt="Cosmic Image" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('https://huggingface.co/spaces/CutyLover/bootyverse-cosmic-revolution/resolve/main/images/photo_6_2025-10-05_15-23-27.jpg', 'Supernova Booty', 'Explosive beauty from the Bootyverse')">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold font-orbitron">Supernova Booty</h3>
+                    <p class="mt-2 text-gray-300">Explosive beauty from the Bootyverse</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Modal -->
@@ -113,32 +162,8 @@
     <footer class="container mx-auto p-6 mt-12 text-center">
         <p class="text-gray-400 font-orbitron">© 2025 BOOTYVERSE - ALL RIGHTS RESERVED</p>
     </footer>
-    
-    
+
     <script>
-        async function loadGallery() {
-            const res = await fetch('/api/images');
-            const images = await res.json();
-
-            const container = document.getElementById('galleryGrid');
-            container.innerHTML = '';
-
-            images.forEach(img => {
-                container.innerHTML += `
-                <div class="gallery-item backdrop-blur-sm bg-black/30 rounded-xl overflow-hidden border border-pink-500/30 glow-box">
-                    <img src="${img.url}" alt="${img.title}" class="w-full h-48 object-cover cursor-pointer"
-                    onclick="openModal('${img.full_url}', '${img.title}', '${img.description}')">
-                    <div class="p-4">
-                    <h3 class="text-xl font-bold font-orbitron">${img.title}</h3>
-                    <p class="mt-2 text-gray-300">${img.description}</p>
-                    </div>
-                </div>
-              `;
-            });
-        }
-
-        window.onload = loadGallery;
-
         feather.replace();
         
         // Generate stars for background
@@ -210,7 +235,6 @@
         
         // Initialize the background
         window.onload = function() {
-            loadGallery();
             createStars('stars', 200);
             createPlanets('planets', 3);
             createComets('comets', 2);
